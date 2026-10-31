@@ -14,23 +14,13 @@
   *,*::before,*::after{box-sizing:border-box}
   :root{
     --bg:#060b09;
-    --glow-1:#0d9488;
-    --glow-2:#0f766e;
-    --card:rgba(255,255,255,.045);
-    --card-2:rgba(255,255,255,.03);
+    --glow-1:#0d9488;--glow-2:#0f766e;
+    --card:rgba(255,255,255,.045);--card-2:rgba(255,255,255,.03);
     --card-solid:#0b1512;
-    --border:rgba(255,255,255,.09);
-    --border-strong:rgba(255,255,255,.15);
-    --txt:#e9f6f1;
-    --txt-2:#b8d4cb;
-    --muted:#8fa8a0;
-    --green:#34d399;
-    --cyan:#22d3ee;
-    --amber:#fbbf24;
-    --red:#f87171;
-    --grad-a:#a7f3d0;
-    --grad-b:#34d399;
-    --grad-c:#22d3ee;
+    --border:rgba(255,255,255,.09);--border-strong:rgba(255,255,255,.15);
+    --txt:#e9f6f1;--txt-2:#b8d4cb;--muted:#8fa8a0;
+    --green:#34d399;--cyan:#22d3ee;--amber:#fbbf24;--red:#f87171;
+    --grad-a:#a7f3d0;--grad-b:#34d399;--grad-c:#22d3ee;
     --shadow:0 20px 60px -30px rgba(0,0,0,.6);
     --chart-grid:rgba(255,255,255,.06);
     --chart-line:#34d399;
@@ -44,24 +34,13 @@
     color-scheme:dark;
   }
   [data-theme="light"]{
-    --bg:#f2f7f4;
-    --glow-1:#6ee7b7;
-    --glow-2:#67e8f9;
-    --card:rgba(255,255,255,.85);
-    --card-2:rgba(255,255,255,.65);
+    --bg:#f2f7f4;--glow-1:#6ee7b7;--glow-2:#67e8f9;
+    --card:rgba(255,255,255,.85);--card-2:rgba(255,255,255,.65);
     --card-solid:#ffffff;
-    --border:rgba(6,40,30,.09);
-    --border-strong:rgba(6,40,30,.16);
-    --txt:#0b1e19;
-    --txt-2:#294a3f;
-    --muted:#5a7a70;
-    --green:#059669;
-    --cyan:#0891b2;
-    --amber:#b45309;
-    --red:#dc2626;
-    --grad-a:#047857;
-    --grad-b:#059669;
-    --grad-c:#0e7490;
+    --border:rgba(6,40,30,.09);--border-strong:rgba(6,40,30,.16);
+    --txt:#0b1e19;--txt-2:#294a3f;--muted:#5a7a70;
+    --green:#059669;--cyan:#0891b2;--amber:#b45309;--red:#dc2626;
+    --grad-a:#047857;--grad-b:#059669;--grad-c:#0e7490;
     --shadow:0 20px 60px -30px rgba(6,40,30,.25);
     --chart-grid:rgba(6,40,30,.07);
     --chart-line:#059669;
@@ -72,16 +51,11 @@
   }
   html,body{height:100%}
   body{
-    margin:0;
-    font-family:var(--font-body);
-    background:var(--bg);
-    color:var(--txt);
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
+    margin:0;font-family:var(--font-body);background:var(--bg);color:var(--txt);
+    -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
     text-rendering:optimizeLegibility;
     padding:clamp(16px,4vw,40px) clamp(12px,3vw,24px) 80px;
-    min-height:100vh;
-    overflow-x:hidden;
+    min-height:100vh;overflow-x:hidden;
     transition:background .5s var(--ease-out),color .5s var(--ease-out);
   }
   h1,h2,h3,.sec-title{font-family:var(--font-display);letter-spacing:-.02em}
@@ -89,8 +63,7 @@
 
   body::before,body::after{
     content:"";position:fixed;border-radius:50%;filter:blur(110px);
-    opacity:.28;pointer-events:none;z-index:0;
-    transition:opacity .5s ease;
+    opacity:.28;pointer-events:none;z-index:0;transition:opacity .5s ease;
   }
   body::before{
     width:min(520px,80vw);height:min(520px,80vw);background:var(--glow-1);
@@ -112,8 +85,7 @@
   }
   @keyframes floatUp{
     0%{transform:translate(0,0);opacity:0}
-    10%{opacity:.7}
-    90%{opacity:.7}
+    10%{opacity:.7}90%{opacity:.7}
     100%{transform:translate(40px,-100vh);opacity:0}
   }
   @media (prefers-reduced-motion:reduce){#particles{display:none}}
@@ -134,10 +106,7 @@
     display:flex;justify-content:space-between;align-items:flex-start;
     gap:12px;padding:4px 0 2px;
   }
-  .brand h1{
-    font-size:clamp(1.55rem,4.8vw,2.2rem);font-weight:800;
-    margin:0 0 6px;line-height:1.1;
-  }
+  .brand h1{font-size:clamp(1.55rem,4.8vw,2.2rem);font-weight:800;margin:0 0 6px;line-height:1.1}
   .brand .grad{
     background:linear-gradient(135deg,var(--grad-a),var(--grad-b) 45%,var(--grad-c));
     background-size:200% 100%;
@@ -179,11 +148,8 @@
   .card:not(.hero):hover::before{opacity:1}
   .card,.stat{
     opacity:0;transform:translateY(26px);
-    transition:
-      opacity .75s var(--ease-out),
-      transform .75s var(--ease-out),
-      background-color .5s ease,
-      border-color .5s ease;
+    transition:opacity .75s var(--ease-out),transform .75s var(--ease-out),
+               background-color .5s ease,border-color .5s ease;
     will-change:opacity,transform;
   }
   .card.revealed,.stat.revealed{opacity:1;transform:translateY(0);transition-delay:var(--reveal-delay,0ms)}
@@ -210,19 +176,16 @@
 
   .btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
   button{
-    position:relative;overflow:hidden;
-    font-size:.84rem;font-weight:700;cursor:pointer;
+    position:relative;overflow:hidden;font-size:.84rem;font-weight:700;cursor:pointer;
     padding:10px 16px;border-radius:12px;border:1px solid var(--border);
     background:var(--card-2);color:var(--txt);
-    transition:background .18s,transform .18s var(--ease-spring),
-               filter .18s,border-color .18s,box-shadow .25s;
+    transition:background .18s,transform .18s var(--ease-spring),filter .18s,border-color .18s,box-shadow .25s;
     -webkit-tap-highlight-color:transparent;
   }
   button:hover{background:var(--card);border-color:var(--border-strong);transform:translateY(-1px)}
   button:active{transform:translateY(0) scale(.98)}
   button.primary{
-    background:linear-gradient(135deg,#059669,#0891b2);
-    border-color:transparent;color:#fff;
+    background:linear-gradient(135deg,#059669,#0891b2);border-color:transparent;color:#fff;
     box-shadow:0 8px 24px -10px rgba(5,150,105,.6);
   }
   button.primary:hover{filter:brightness(1.12);box-shadow:0 12px 28px -10px rgba(5,150,105,.75)}
@@ -249,12 +212,10 @@
   @keyframes heroGlow{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(1.06)}}
   .hero > *{position:relative;z-index:1}
   .save-ind{
-    position:absolute;top:14px;right:18px;
-    font-size:.74rem;font-weight:800;color:var(--green);
+    position:absolute;top:14px;right:18px;font-size:.74rem;font-weight:800;color:var(--green);
     background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.3);
     padding:5px 11px;border-radius:99px;
-    opacity:0;pointer-events:none;
-    transform:translateY(-6px) scale(.9);
+    opacity:0;pointer-events:none;transform:translateY(-6px) scale(.9);
     transition:opacity .35s ease,transform .35s ease;z-index:2;
   }
   .save-ind.show{
@@ -267,13 +228,12 @@
     100%{transform:scale(1) translateY(0);opacity:1}
   }
   .hero .label{
-    font-size:.76rem;letter-spacing:.2em;
-    text-transform:uppercase;color:var(--muted);font-weight:800;
+    font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--muted);font-weight:800;
   }
   .money{
     display:block;margin:16px 0 12px;line-height:1;
-    font-family:var(--font-display);
-    font-size:clamp(2.4rem,9vw,4.4rem);font-weight:800;
+    font-family:var(--font-display);font-size:clamp(2.4rem,9vw,4.4rem);font-weight:800;
     letter-spacing:-.035em;font-variant-numeric:tabular-nums;
     background:linear-gradient(135deg,var(--grad-a),var(--grad-b) 35%,var(--grad-c) 65%,var(--grad-b) 85%,var(--grad-a));
     background-size:250% 100%;
@@ -286,28 +246,17 @@
   @keyframes moneyBump{0%,100%{transform:scale(1)}45%{transform:scale(1.035)}}
   .money .kurus{font-size:.5em;opacity:.75;letter-spacing:-.02em}
 
-  /* ==== Sigarasız sayacı (ms'li) ==== */
   .clock{
-    font-family:var(--font-display);
-    font-size:1.02rem;color:var(--txt-2);
-    font-weight:600;font-variant-numeric:tabular-nums;
-    letter-spacing:-.01em;
+    font-family:var(--font-display);font-size:1.02rem;color:var(--txt-2);
+    font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.01em;
     transition:color .3s;
   }
-  .clock-ms-inline{
-    font-size:.72em;
-    opacity:.55;
-    font-weight:700;
-    letter-spacing:-.01em;
-    font-variant-numeric:tabular-nums;
-  }
-  @media (max-width:420px){
-    .clock{font-size:.9rem}
-  }
+  .clock-ms-inline{font-size:.72em;opacity:.55;font-weight:700;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+  @media (max-width:420px){.clock{font-size:.9rem}}
 
   .rate{
-    margin-top:10px;font-size:.78rem;
-    color:var(--muted);font-variant-numeric:tabular-nums;font-weight:600;
+    margin-top:10px;font-size:.78rem;color:var(--muted);
+    font-variant-numeric:tabular-nums;font-weight:600;
   }
   .rate b{color:var(--green);font-weight:800;font-family:var(--font-display)}
   .note{margin-top:14px;font-size:.85rem;color:var(--amber);font-weight:700}
@@ -325,9 +274,8 @@
   }
 
   .equivalents{
-    display:flex;gap:8px;flex-wrap:wrap;
-    justify-content:center;margin-top:20px;padding-top:18px;
-    border-top:1px dashed var(--border);
+    display:flex;gap:8px;flex-wrap:wrap;justify-content:center;
+    margin-top:20px;padding-top:18px;border-top:1px dashed var(--border);
   }
   .equiv{
     display:flex;align-items:center;gap:6px;
@@ -339,45 +287,161 @@
   .equiv.zero{opacity:.35}
   .equiv b{color:var(--green);font-variant-numeric:tabular-nums;font-family:var(--font-display)}
 
-  /* ==== Canlı saat kartı ==== */
+  /* ==== Saat kartları ==== */
+  .clock-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media (max-width:660px){.clock-row{grid-template-columns:1fr}}
+
   .clock-card{padding:clamp(14px,2.5vw,20px) clamp(16px,3vw,24px)}
-  .live-clock-inner{
-    display:flex;justify-content:space-between;align-items:center;
-    gap:16px;flex-wrap:wrap;
+  .live-clock-inner{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+  .live-clock-content{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .clock-label{
+    font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--muted);font-weight:800;margin-bottom:4px;
   }
-  .live-clock-content{display:flex;flex-direction:column;gap:4px;min-width:0}
   .live-clock-date{
-    font-family:var(--font-body);font-size:.8rem;font-weight:600;
-    color:var(--muted);letter-spacing:.02em;
+    font-family:var(--font-body);font-size:.78rem;font-weight:600;
+    color:var(--muted);letter-spacing:.02em;margin-bottom:2px;
   }
   .live-clock-time{
+    font-family:var(--font-display);font-size:clamp(1.4rem,4.4vw,2rem);font-weight:700;
+    letter-spacing:-.02em;font-variant-numeric:tabular-nums;
+    background:linear-gradient(135deg,var(--grad-a),var(--grad-b) 45%,var(--grad-c));
+    background-size:200% 100%;
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:shimmer 8s linear infinite;line-height:1;
+  }
+  .quit-time{
+    background:linear-gradient(135deg,#fde68a,#fbbf24 45%,#fb923c 75%,#f87171) !important;
+    background-size:200% 100% !important;
+  }
+  .live-clock-ms{font-size:.55em;opacity:.55;letter-spacing:-.01em;font-weight:700;font-variant-numeric:tabular-nums}
+  .live-indicator{
+    display:flex;align-items:center;gap:7px;font-size:.7rem;font-weight:800;
+    color:var(--green);letter-spacing:.08em;text-transform:uppercase;flex-shrink:0;
+  }
+  .live-dot{
+    width:8px;height:8px;border-radius:50%;background:var(--green);
+    box-shadow:0 0 12px var(--green);animation:livePulse 1.4s ease-in-out infinite;
+  }
+  @keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.85)}}
+  .quit-badge{
+    width:46px;height:46px;border-radius:50%;
+    background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.3);
+    display:grid;place-items:center;font-size:1.45rem;flex-shrink:0;
+    box-shadow:0 0 20px -6px rgba(251,191,36,.5);
+    transition:transform .3s var(--ease-spring);
+  }
+  .quit-card:hover .quit-badge{transform:scale(1.08) rotate(-6deg)}
+
+  /* ==== Bıraktığından beri kartı ==== */
+  .since-card{
+    padding:clamp(20px,3.5vw,32px) clamp(16px,3vw,24px);
+    text-align:center;
+  }
+  .since-header{
+    display:flex;justify-content:space-between;align-items:center;
+    gap:12px;margin-bottom:16px;
+  }
+  .since-title{
+    font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--muted);font-weight:800;
+    display:flex;align-items:center;gap:8px;
+  }
+  .since-title .icon{font-size:.95rem;opacity:.9}
+  .since-total-badge{
     font-family:var(--font-display);
-    font-size:clamp(1.5rem,4.8vw,2.1rem);
-    font-weight:700;letter-spacing:-.02em;
+    font-size:.72rem;font-weight:800;color:var(--green);
+    background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.28);
+    padding:5px 11px;border-radius:99px;letter-spacing:.02em;
+    font-variant-numeric:tabular-nums;
+  }
+
+  /* Takvim kırılımı (büyük bloklar) */
+  .calendar-breakdown{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(80px, 1fr));
+    gap:8px;
+    margin-bottom:14px;
+  }
+  .cal-unit{
+    background:var(--card-2);border:1px solid var(--border);
+    border-radius:12px;
+    padding:12px 8px;
+    display:flex;flex-direction:column;align-items:center;gap:2px;
+    transition:transform .25s var(--ease-spring),border-color .25s,background .25s;
+    position:relative;
+    overflow:hidden;
+  }
+  .cal-unit:hover{transform:translateY(-3px);border-color:var(--border-strong)}
+  .cal-unit.primary{
+    background:linear-gradient(135deg,rgba(52,211,153,.12),rgba(34,211,238,.06));
+    border-color:rgba(52,211,153,.28);
+  }
+  .cal-unit .val{
+    font-family:var(--font-display);
+    font-size:clamp(1.5rem,4.2vw,2rem);
+    font-weight:800;
+    line-height:1;
+    letter-spacing:-.02em;
     font-variant-numeric:tabular-nums;
     background:linear-gradient(135deg,var(--grad-a),var(--grad-b) 45%,var(--grad-c));
     background-size:200% 100%;
     -webkit-background-clip:text;background-clip:text;color:transparent;
     animation:shimmer 8s linear infinite;
-    line-height:1;
   }
-  .live-clock-ms{
-    font-size:.55em;opacity:.55;letter-spacing:-.01em;
-    font-weight:700;font-variant-numeric:tabular-nums;
+  .cal-unit .val.zero{opacity:.4}
+  .cal-unit .unit{
+    font-size:.65rem;color:var(--muted);font-weight:700;
+    letter-spacing:.1em;text-transform:uppercase;
   }
-  .live-indicator{
-    display:flex;align-items:center;gap:7px;
-    font-size:.72rem;font-weight:800;color:var(--green);
+
+  /* Milisaniye (küçük, sağa hizalı satır) */
+  .ms-line{
+    display:flex;justify-content:center;align-items:baseline;gap:4px;
+    font-family:var(--font-display);
+    font-size:.95rem;
+    color:var(--muted);
+    font-weight:700;
+    font-variant-numeric:tabular-nums;
+    margin-bottom:20px;
+    padding-bottom:16px;
+    border-bottom:1px dashed var(--border);
+  }
+  .ms-line .ms-value{
+    color:var(--green);
+    font-size:1.1rem;
+  }
+  .ms-line .ms-label{
+    font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;
+  }
+
+  /* Toplam süre birimleri (mini grid) */
+  .totals-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(105px, 1fr));
+    gap:8px;
+  }
+  .total-unit{
+    background:var(--card-2);border:1px solid var(--border);
+    border-radius:10px;
+    padding:10px 8px;
+    display:flex;flex-direction:column;align-items:flex-start;gap:2px;
+    text-align:left;
+    transition:border-color .2s,background .2s;
+  }
+  .total-unit:hover{border-color:var(--border-strong);background:var(--card)}
+  .total-unit .t-val{
+    font-family:var(--font-display);
+    font-size:.98rem;font-weight:800;
+    color:var(--txt);
+    font-variant-numeric:tabular-nums;
+    letter-spacing:-.01em;
+    line-height:1.15;
+    word-break:break-all;
+  }
+  .total-unit .t-lbl{
+    font-size:.6rem;color:var(--muted);font-weight:700;
     letter-spacing:.08em;text-transform:uppercase;
-  }
-  .live-dot{
-    width:8px;height:8px;border-radius:50%;
-    background:var(--green);box-shadow:0 0 12px var(--green);
-    animation:livePulse 1.4s ease-in-out infinite;
-  }
-  @keyframes livePulse{
-    0%,100%{opacity:1;transform:scale(1)}
-    50%{opacity:.5;transform:scale(.85)}
   }
 
   .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
@@ -390,8 +454,7 @@
   }
   .stat:hover{border-color:var(--border-strong)}
   .stat b{
-    display:block;font-family:var(--font-display);
-    font-size:1.55rem;font-weight:800;
+    display:block;font-family:var(--font-display);font-size:1.55rem;font-weight:800;
     font-variant-numeric:tabular-nums;margin-bottom:3px;color:var(--txt);
     transition:color .3s;
   }
@@ -641,19 +704,67 @@
     <div class="equivalents" id="equivalents" aria-live="polite"></div>
   </section>
 
-  <!-- Canlı saat -->
-  <section class="card clock-card">
-    <div class="live-clock-inner">
-      <div class="live-clock-content">
-        <div class="live-clock-date" id="currentDate">—</div>
-        <div class="live-clock-time" aria-live="off">
-          <span id="clockHMS">00:00:00</span><span class="live-clock-ms" id="clockMs">.000</span>
+  <!-- Saatler: sol = bıraktığın an, sağ = şu an -->
+  <div class="clock-row">
+    <section class="card clock-card quit-card">
+      <div class="live-clock-inner">
+        <div class="live-clock-content">
+          <div class="clock-label">Bıraktığın an</div>
+          <div class="live-clock-date" id="quitDateDisplay">—</div>
+          <div class="live-clock-time quit-time" aria-live="off">
+            <span id="quitHMS">00:00:00</span><span class="live-clock-ms" id="quitMs">.000</span>
+          </div>
+        </div>
+        <div class="quit-badge" aria-hidden="true">🚭</div>
+      </div>
+    </section>
+
+    <section class="card clock-card">
+      <div class="live-clock-inner">
+        <div class="live-clock-content">
+          <div class="clock-label">Şu an</div>
+          <div class="live-clock-date" id="currentDate">—</div>
+          <div class="live-clock-time" aria-live="off">
+            <span id="clockHMS">00:00:00</span><span class="live-clock-ms" id="clockMs">.000</span>
+          </div>
+        </div>
+        <div class="live-indicator" aria-hidden="true">
+          <span class="live-dot"></span>
+          <span>Canlı</span>
         </div>
       </div>
-      <div class="live-indicator" aria-hidden="true">
-        <span class="live-dot"></span>
-        <span>Canlı</span>
-      </div>
+    </section>
+  </div>
+
+  <!-- Bıraktığından beri: tam süre + tarih farkı -->
+  <section class="card since-card">
+    <div class="since-header">
+      <div class="since-title"><span class="icon">⏳</span> Bıraktığından beri</div>
+      <div class="since-total-badge" id="sinceTotalBadge">—</div>
+    </div>
+
+    <div class="calendar-breakdown" id="calendarBreakdown">
+      <div class="cal-unit primary"><span class="val" id="calYears">0</span><span class="unit">yıl</span></div>
+      <div class="cal-unit"><span class="val" id="calMonths">0</span><span class="unit">ay</span></div>
+      <div class="cal-unit"><span class="val" id="calDays">0</span><span class="unit">gün</span></div>
+      <div class="cal-unit"><span class="val" id="calHours">0</span><span class="unit">saat</span></div>
+      <div class="cal-unit"><span class="val" id="calMinutes">0</span><span class="unit">dakika</span></div>
+      <div class="cal-unit"><span class="val" id="calSeconds">0</span><span class="unit">saniye</span></div>
+    </div>
+
+    <div class="ms-line">
+      <span class="ms-value" id="calMillis">000</span>
+      <span class="ms-label">milisaniye</span>
+    </div>
+
+    <div class="totals-grid">
+      <div class="total-unit"><span class="t-val" id="totalSeconds">0</span><span class="t-lbl">toplam saniye</span></div>
+      <div class="total-unit"><span class="t-val" id="totalMinutes">0</span><span class="t-lbl">toplam dakika</span></div>
+      <div class="total-unit"><span class="t-val" id="totalHours">0</span><span class="t-lbl">toplam saat</span></div>
+      <div class="total-unit"><span class="t-val" id="totalDays">0</span><span class="t-lbl">toplam gün</span></div>
+      <div class="total-unit"><span class="t-val" id="totalWeeks">0</span><span class="t-lbl">toplam hafta</span></div>
+      <div class="total-unit"><span class="t-val" id="totalMonths">0</span><span class="t-lbl">toplam ay</span></div>
+      <div class="total-unit"><span class="t-val" id="totalYears">0</span><span class="t-lbl">toplam yıl</span></div>
     </div>
   </section>
 
@@ -724,7 +835,7 @@
 
 <script>
 /* ============================================================
-   Sigarasız Hayat — Saatli & ms'li Sayaç
+   Sigarasız Hayat — Bırakma Anı + Canlı Saat + Tarih Farkı
    ============================================================ */
 const $ = (s) => document.querySelector(s);
 const KEY = 'sigarasiz-hayat-v2';
@@ -783,6 +894,7 @@ const QUOTES = [
 const nfMoney2 = new Intl.NumberFormat('tr-TR', { style:'currency', currency:'TRY', minimumFractionDigits:2, maximumFractionDigits:2 });
 const nfMoney0 = new Intl.NumberFormat('tr-TR', { style:'currency', currency:'TRY', maximumFractionDigits:0 });
 const nfInt    = new Intl.NumberFormat('tr-TR', { maximumFractionDigits:0 });
+const nfDec    = new Intl.NumberFormat('tr-TR', { maximumFractionDigits:2 });
 const dateFmt  = new Intl.DateTimeFormat('tr-TR', {
   weekday:'long', day:'numeric', month:'long', year:'numeric'
 });
@@ -850,7 +962,20 @@ const el = {
   themeBtn: $('#themeBtn'), shareBtn: $('#shareBtn'),
   money: $('#money'), clock: $('#clock'), rate: $('#rate'), note: $('#note'),
   equivalents: $('#equivalents'),
+  /* Bırakma anı kartı */
+  quitDateDisplay: $('#quitDateDisplay'),
+  quitHMS: $('#quitHMS'),
+  quitMs: $('#quitMs'),
+  /* Şu an kartı */
   currentDate: $('#currentDate'), clockHMS: $('#clockHMS'), clockMs: $('#clockMs'),
+  /* Bıraktığından beri */
+  sinceTotalBadge: $('#sinceTotalBadge'),
+  calYears: $('#calYears'), calMonths: $('#calMonths'), calDays: $('#calDays'),
+  calHours: $('#calHours'), calMinutes: $('#calMinutes'), calSeconds: $('#calSeconds'),
+  calMillis: $('#calMillis'),
+  totalSeconds: $('#totalSeconds'), totalMinutes: $('#totalMinutes'),
+  totalHours: $('#totalHours'), totalDays: $('#totalDays'),
+  totalWeeks: $('#totalWeeks'), totalMonths: $('#totalMonths'), totalYears: $('#totalYears'),
   statDays: $('#statDays'), statCigs: $('#statCigs'),
   statPacks: $('#statPacks'), statPerDay: $('#statPerDay'),
   projections: $('#projections'),
@@ -1034,7 +1159,132 @@ function formatClockMs(date){
   return `.${ms}`;
 }
 
-/* ==== Para sayacı: yumuşak geçiş ==== */
+/* ==== TAKVİM FARKI (yıl, ay, gün, saat, dakika, saniye, ms) ====
+   İki tarih arasındaki takvim farkını verir. Ay/yıl farkı gerçek
+   takvime göre hesaplanır; Şubat 28/29 doğru ele alınır.
+============================================================ */
+function calendarDiff(fromDate, toDate){
+  // toDate < fromDate ise sıfır döndür
+  if (toDate.getTime() <= fromDate.getTime()){
+    return { years:0, months:0, days:0, hours:0, minutes:0, seconds:0, millis:0 };
+  }
+
+  let years   = toDate.getFullYear() - fromDate.getFullYear();
+  let months  = toDate.getMonth()    - fromDate.getMonth();
+  let days    = toDate.getDate()     - fromDate.getDate();
+  let hours   = toDate.getHours()    - fromDate.getHours();
+  let minutes = toDate.getMinutes()  - fromDate.getMinutes();
+  let seconds = toDate.getSeconds()  - fromDate.getSeconds();
+  let millis  = toDate.getMilliseconds() - fromDate.getMilliseconds();
+
+  // ms -> saniye borçlan
+  if (millis < 0){ millis += 1000; seconds--; }
+  if (seconds < 0){ seconds += 60; minutes--; }
+  if (minutes < 0){ minutes += 60; hours--; }
+  if (hours < 0){ hours += 24; days--; }
+
+  // gün negatifse: bir önceki ayın gün sayısını ekle
+  if (days < 0){
+    // toDate'in bir önceki ayının toplam gün sayısı
+    const prevMonth = new Date(toDate.getFullYear(), toDate.getMonth(), 0);
+    days += prevMonth.getDate();
+    months--;
+  }
+  if (months < 0){ months += 12; years--; }
+
+  return { years, months, days, hours, minutes, seconds, millis };
+}
+
+/* ==== Takvim farkı kartını güncelle ==== */
+let lastCalRender = 0;
+function updateSinceCard(nowMs){
+  const quit = new Date(state.quitDate).getTime();
+  if (nowMs < quit){
+    // Henüz bırakmadıysa sıfır göster
+    setCalValues(0,0,0,0,0,0,0);
+    if (el.sinceTotalBadge) el.sinceTotalBadge.textContent = 'Henüz başlamadı';
+    setTotalValues(0);
+    return;
+  }
+
+  const from = new Date(quit);
+  const to   = new Date(nowMs);
+  const diff = calendarDiff(from, to);
+
+  setCalValues(diff.years, diff.months, diff.days, diff.hours, diff.minutes, diff.seconds, diff.millis);
+
+  // Badge: "3 yıl 2 ay 5 gün" gibi kısa özet
+  if (el.sinceTotalBadge){
+    const parts = [];
+    if (diff.years)   parts.push(`${diff.years} yıl`);
+    if (diff.months)  parts.push(`${diff.months} ay`);
+    if (diff.days)    parts.push(`${diff.days} gün`);
+    if (parts.length === 0){
+      if (diff.hours)   parts.push(`${diff.hours} saat`);
+      else if (diff.minutes) parts.push(`${diff.minutes} dakika`);
+      else parts.push('az önce');
+    }
+    el.sinceTotalBadge.textContent = parts.slice(0, 2).join(' ');
+  }
+
+  // Toplam birimler
+  const totalMs = nowMs - quit;
+  setTotalValues(totalMs);
+}
+
+function setCalValues(y, mo, d, h, mi, s, ms){
+  el.calYears.textContent   = nfInt.format(y);
+  el.calMonths.textContent  = nfInt.format(mo);
+  el.calDays.textContent    = nfInt.format(d);
+  el.calHours.textContent   = String(h).padStart(2,'0');
+  el.calMinutes.textContent = String(mi).padStart(2,'0');
+  el.calSeconds.textContent = String(s).padStart(2,'0');
+  el.calMillis.textContent  = String(ms).padStart(3,'0');
+
+  // Sıfır olanları soluklaştır
+  toggleZero(el.calYears, y === 0);
+  toggleZero(el.calMonths, mo === 0);
+  toggleZero(el.calDays, d === 0);
+  toggleZero(el.calHours, h === 0);
+  toggleZero(el.calMinutes, mi === 0);
+  toggleZero(el.calSeconds, s === 0);
+}
+function toggleZero(node, isZero){
+  if (!node) return;
+  node.classList.toggle('zero', isZero);
+}
+
+function setTotalValues(totalMs){
+  const totalSeconds = totalMs / 1000;
+  const totalMinutes = totalSeconds / 60;
+  const totalHours   = totalMinutes / 60;
+  const totalDays    = totalHours / 24;
+  const totalWeeks   = totalDays / 7;
+  const totalMonths  = totalDays / 30.436875;    // ortalama ay uzunluğu
+  const totalYears   = totalDays / 365.2425;     // ortalama yıl uzunluğu
+
+  el.totalSeconds.textContent = nfInt.format(Math.floor(totalSeconds));
+  el.totalMinutes.textContent = nfInt.format(Math.floor(totalMinutes));
+  el.totalHours.textContent   = nfInt.format(Math.floor(totalHours));
+  el.totalDays.textContent    = nfInt.format(Math.floor(totalDays));
+  el.totalWeeks.textContent   = nfInt.format(Math.floor(totalWeeks));
+  el.totalMonths.textContent  = nfDec.format(totalMonths);
+  el.totalYears.textContent   = nfDec.format(totalYears);
+}
+
+/* ==== Bıraktığın an kartını güncelle (sadece değiştiğinde) ==== */
+let lastQuitISO = '';
+function updateQuitDisplay(){
+  if (state.quitDate === lastQuitISO) return;
+  lastQuitISO = state.quitDate;
+  const d = new Date(state.quitDate);
+  if (isNaN(d.getTime())) return;
+  if (el.quitDateDisplay) el.quitDateDisplay.textContent = dateFmt.format(d);
+  if (el.quitHMS)         el.quitHMS.textContent = formatClockHMS(d);
+  if (el.quitMs)          el.quitMs.textContent  = formatClockMs(d);
+}
+
+/* ==== Para sayacı ==== */
 let displayMoney = 0;
 let lastIntDisplayed = -1;
 let initialSettled = false;
@@ -1056,17 +1306,19 @@ function updateMoneyDOM(value){
   lastIntDisplayed = intPart;
 }
 
-/* ==== Canlı saat döngüsü (ms'li) ==== */
+/* ==== Yüksek hızlı döngü ==== */
 let lastDateStr = '';
+let lastSinceUpdate = 0;
+
 function clockLoop(){
   const nowMs = Date.now();
   const nowDate = new Date(nowMs);
 
-  // --- Şu anki saat (HH:MM:SS.mmm) ---
+  // Şu anki saat
   if (el.clockHMS) el.clockHMS.textContent = formatClockHMS(nowDate);
   if (el.clockMs)  el.clockMs.textContent  = formatClockMs(nowDate);
 
-  // --- Tarih (sadece değişince yaz) ---
+  // Bugünün tarihi
   if (el.currentDate){
     const dateStr = dateFmt.format(nowDate);
     if (dateStr !== lastDateStr){
@@ -1075,14 +1327,20 @@ function clockLoop(){
     }
   }
 
-  // --- Sigarasız sayacı (ms'li) ---
+  // Sigarasız sayacı (ms'li)
   const quit = new Date(state.quitDate).getTime();
   const elapsed = Math.max(0, nowMs - quit);
   if (el.clock){
     el.clock.innerHTML = formatSigarasiz(elapsed);
   }
 
-  // --- Para sayacı animasyonu ---
+  // Bıraktığından beri — her 50ms'de bir (ms sıfırı yakalamak için)
+  if (nowMs - lastSinceUpdate >= 50){
+    lastSinceUpdate = nowMs;
+    updateSinceCard(nowMs);
+  }
+
+  // Para animasyonu
   const targetMoney = (elapsed / 86400000) * getDailySaving();
   const diff = targetMoney - displayMoney;
   if (Math.abs(diff) > 0.00005){
@@ -1109,7 +1367,6 @@ function renderEquivalents(money){
   }).join('');
 }
 
-/* ---- Rate + equivalents + note (500ms'de bir) ---- */
 function renderHeroMeta(){
   const { nowMs } = getElapsed();
   const perDay = getDailySaving();
@@ -1391,6 +1648,8 @@ el.importFile.addEventListener('change', (e) => {
       el.quit.value = toLocalInput(state.quitDate);
       el.ppd.value = state.packsPerDay;
       el.price.value = state.packPrice;
+      lastQuitISO = '';
+      updateQuitDisplay();
       initCelebrated();
       renderAll();
       showToast('Veriler içe aktarıldı.', 'success');
@@ -1414,6 +1673,8 @@ el.quit.addEventListener('input', () => {
   state.quitDate = d.toISOString();
   saveState();
   initialSettled = false;
+  lastQuitISO = '';
+  updateQuitDisplay();
   renderAll();
   initCelebrated();
 });
@@ -1440,6 +1701,8 @@ el.nowBtn.addEventListener('click', () => {
   saveState();
   initialSettled = false;
   displayMoney = 0;
+  lastQuitISO = '';
+  updateQuitDisplay();
   renderAll();
   showToast('Sayaç başladı. Kararın kutlu olsun! 🚭', 'success');
   fireConfetti();
@@ -1460,6 +1723,8 @@ el.resetBtn.addEventListener('click', () => {
   saveState();
   displayMoney = 0;
   initialSettled = false;
+  lastQuitISO = '';
+  updateQuitDisplay();
   renderAll();
   showToast('Her şey sıfırlandı.');
 });
@@ -1517,9 +1782,10 @@ function renderAll(){
   renderGoals();
   renderHealth();
   drawChart();
+  updateQuitDisplay();
 }
 
-/* ---- Yavaş döngü (500ms/2s) ---- */
+/* ---- Yavaş döngü ---- */
 setInterval(() => {
   renderHealth();
   renderHeroMeta();
@@ -1551,7 +1817,6 @@ setInterval(() => {
   renderAll();
   setupReveal();
 
-  // Tek bir yüksek-hızlı döngü: saat + sigarasız + para
   requestAnimationFrame(clockLoop);
 })();
 </script>
