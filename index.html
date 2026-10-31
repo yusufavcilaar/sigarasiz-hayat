@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#060b09">
+<title>Sigarasız Hayat — Biriken Paran</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  :root{
+    --bg:#060b09;
+    --glow-1:#0d9488;
+    --glow-2:#0f766e;
+    --card:rgba(255,255,255,.045);
+    --card-2:rgba(255,255,255,.03);
+    --card-solid:#0b1512;
+    --border:rgba(255,255,255,.09);
+    --border-strong:rgba(255,255,255,.15);
+    --txt:#e9f6f1;
+    --txt-2:#b8d4cb;
+    --muted:#8fa8a0;
+    --green:#34d399;
+    --cyan:#22d3ee;
+    --amber:#fbbf24;
+    --red:#f87171;
+    --grad-a:#a7f3d0;
+    --grad-b:#34d399;
+    --grad-c:#22d3ee;
+    --shadow:0 20px 60px -30px rgba(0,0,0,.6);
+    --chart-grid:rgba(255,255,255,.06);
+    --chart-line:#34d399;
+    --chart-area-top:rgba(52,211,153,.28);
+    --chart-area-bot:rgba(34,211,238,0);
+    --input-bg:rgba(0,0,0,.3);
+    color-scheme:dark;
+  }
+  [data-theme="light"]{
+    --bg:#f2f7f4;
+    --glow-1:#6ee7b7;
+    --glow-2:#67e8f9;
+    --card:rgba(255,255,255,.85);
+    --card-2:rgba(255,255,255,.65);
+    --card-solid:#ffffff;
+    --border:rgba(6,40,30,.09);
+    --border-strong:rgba(6,40,30,.16);
+    --txt:#0b1e19;
+    --txt-2:#294a3f;
+    --muted:#5a7a70;
+    --green:#059669;
+    --cyan:#0891b2;
+    --amber:#b45309;
+    --red:#dc2626;
+    --grad-a:#047857;
+    --grad-b:#059669;
+    --grad-c:#0e7490;
+    --shadow:0 20px 60px -30px rgba(6,40,30,.25);
+    --chart-grid:rgba(6,40,30,.07);
+    --chart-line:#059669;
+    --chart-area-top:rgba(5,150,105,.22);
+    --chart-area-bot:rgba(8,145,178,0);
+    --input-bg:rgba(255,255,255,.9);
+    color-scheme:light;
+  }
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--txt);
+    -webkit-font-smoothing:antialiased;
+    padding:clamp(16px,4vw,40px) clamp(12px,3vw,24px) 80px;
+    min-height:100vh;
+    overflow-x:hidden;
+    transition:background .4s ease,color .4s ease;
+  }
+  body::before,body::after{
+    content:"";position:fixed;border-radius:50%;filter:blur(110px);
+    opacity:.28;pointer-events:none;z-index:0;
+    transition:opacity .4s ease;
+  }
+  body::before{
+    width:min(520px,80vw);height:min(520px,80vw);background:var(--glow-1);
+    top:-220px;left:-160px;animation:float 18s ease-in-out infinite;
+  }
+  body::after{
+    width:min(620px,90vw);height:min(620px,90vw);background:var(--glow-2);
+    bottom:-280px;right:-200px;animation:float 22s ease-in-out infinite reverse;
+  }
+  [data-theme="light"] body::before,
+  [data-theme="light"] body::after{opacity:.4}
+  @keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(34px,-28px)}}
+
+  .wrap{
+    position:relative;z-index:1;max-width:920px;margin:0 auto;
+    display:flex;flex-direction:column;gap:16px;
+  }
+
+  /* ==== Üst bar ==== */
+  .top-bar{
+    display:flex;justify-content:space-between;align-items:flex-start;
+    gap:12px;padding:4px 0 2px;
+  }
+  .brand h1{
+    font-size:clamp(1.5rem,4.6vw,2.1rem);font-weight:800;
+    letter-spacing:-.025em;margin:0 0 4px;
+  }
+  .brand .grad{
+    background:linear-gradient(135deg,var(--grad-a),var(--grad-b) 45%,var(--grad-c));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .brand .quote{
+    font-size:.86rem;color:var(--muted);margin:0;
+    transition:opacity .6s ease;min-height:1.2em;
+  }
+  .actions{display:flex;gap:8px;flex-shrink:0}
+  .icon-btn{
+    width:40px;height:40px;border-radius:12px;cursor:pointer;
+    display:grid;place-items:center;font-size:1.05rem;
+    background:var(--card);border:1px solid var(--border);
+    color:var(--txt);transition:background .2s,transform .2s,border-color .2s;
+  }
+  .icon-btn:hover{background:var(--card-2);border-color:var(--border-strong);transform:translateY(-1px)}
+  .icon-btn:active{transform:translateY(0)}
+
+  /* ==== Kart ==== */
+  .card{
+    background:var(--card);border:1px solid var(--border);border-radius:20px;
+    padding:clamp(16px,3vw,24px);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    box-shadow:var(--shadow);
+    animation:fadeUp .5s ease backwards;
+  }
+  .card:nth-child(1){animation-delay:0s}
+  .card:nth-child(2){animation-delay:.04s}
+  .card:nth-child(3){animation-delay:.08s}
+  .card:nth-child(4){animation-delay:.12s}
+  .card:nth-child(5){animation-delay:.16s}
+  .card:nth-child(6){animation-delay:.20s}
+  .card:nth-child(7){animation-delay:.24s}
+  .card:nth-child(8){animation-delay:.28s}
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(10px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+
+  /* ==== Ayarlar ==== */
+  #settings{display:none}
+  #settings.open{display:block}
+  .settings-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:14px;align-items:end}
+  @media(max-width:660px){
+    .settings-grid{grid-template-columns:1fr 1fr}
+    .settings-grid .full{grid-column:1/-1}
+  }
+  label.field{
+    display:flex;flex-direction:column;gap:7px;font-size:.76rem;
+    color:var(--muted);font-weight:700;letter-spacing:.03em;
+    text-transform:uppercase;
+  }
+  input,select{
+    width:100%;padding:11px 13px;border-radius:12px;border:1px solid var(--border);
+    background:var(--input-bg);color:var(--txt);font-size:.95rem;font-weight:600;
+    font-family:inherit;outline:none;
+    transition:border-color .2s,box-shadow .2s;
+  }
+  input:focus,select:focus{border-color:rgba(52,211,153,.6);box-shadow:0 0 0 3px rgba(52,211,153,.14)}
+  .btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+  button{
+    font-family:inherit;font-size:.84rem;font-weight:700;cursor:pointer;
+    padding:10px 16px;border-radius:12px;border:1px solid var(--border);
+    background:var(--card-2);color:var(--txt);
+    transition:background .18s,transform .18s,filter .18s,border-color .18s;
+  }
+  button:hover{background:var(--card);border-color:var(--border-strong);transform:translateY(-1px)}
+  button:active{transform:translateY(0)}
+  button.primary{
+    background:linear-gradient(135deg,#059669,#0891b2);
+    border-color:transparent;color:#fff;
+  }
+  button.primary:hover{filter:brightness(1.12)}
+  button.danger{color:var(--red)}
+  button.danger:hover{background:rgba(248,113,113,.12)}
+
+  /* ==== Kahraman sayaç ==== */
+  .hero{
+    text-align:center;position:relative;overflow:hidden;
+    padding:clamp(22px,5vw,42px) clamp(16px,3vw,24px);
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(circle at 50% 0%,rgba(52,211,153,.18),transparent 68%);
+  }
+  [data-theme="light"] .hero::after{
+    background:radial-gradient(circle at 50% 0%,rgba(5,150,105,.10),transparent 68%);
+  }
+  .hero .label{
+    position:relative;font-size:.76rem;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--muted);font-weight:800;
+  }
+  .money{
+    position:relative;margin:14px 0 10px;line-height:1;display:block;
+    font-size:clamp(2.4rem,9vw,4.4rem);font-weight:800;
+    letter-spacing:-.035em;font-variant-numeric:tabular-nums;
+    background:linear-gradient(135deg,var(--grad-a),var(--grad-b) 45%,var(--grad-c));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    transition:transform .15s ease;
+  }
+  .money .kurus{font-size:.5em;opacity:.75;letter-spacing:-.02em}
+  .clock{
+    position:relative;font-size:1rem;color:var(--txt-2);
+    font-weight:700;font-variant-numeric:tabular-nums;
+  }
+  .rate{
+    position:relative;margin-top:10px;font-size:.78rem;
+    color:var(--muted);font-variant-numeric:tabular-nums;
+  }
+  .rate b{color:var(--green);font-weight:800}
+  .note{
+    position:relative;margin-top:14px;font-size:.85rem;
+    color:var(--amber);font-weight:700;
+  }
+  .note:empty{display:none}
+
+  /* ==== Para eşdeğerleri ==== */
+  .equivalents{
+    position:relative;display:flex;gap:8px;flex-wrap:wrap;
+    justify-content:center;margin-top:18px;padding-top:16px;
+    border-top:1px dashed var(--border);
+  }
+  .equiv{
+    display:flex;align-items:center;gap:6px;
+    background:var(--card-2);border:1px solid var(--border);
+    padding:6px 11px;border-radius:99px;font-size:.78rem;font-weight:700;
+    color:var(--txt-2);transition:opacity .3s;
+  }
+  .equiv.zero{opacity:.35}
+  .equiv b{color:var(--green);font-variant-numeric:tabular-nums}
+
+  /* ==== İstatistikler ==== */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+  .stat{
+    background:var(--card);border:1px solid var(--border);border-radius:16px;
+    padding:16px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    box-shadow:var(--shadow);
+    animation:fadeUp .5s ease backwards;
+  }
+  .stat:nth-child(1){animation-delay:.05s}
+  .stat:nth-child(2){animation-delay:.10s}
+  .stat:nth-child(3){animation-delay:.15s}
+  .stat:nth-child(4){animation-delay:.20s}
+  .stat b{
+    display:block;font-size:1.55rem;font-weight:800;
+    font-variant-numeric:tabular-nums;margin-bottom:3px;color:var(--txt);
+  }
+  .stat small{color:var(--muted);font-size:.74rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+
+  /* ==== Bölüm başlığı ==== */
+  .sec-head{
+    display:flex;justify-content:space-between;align-items:flex-start;
+    gap:12px;margin-bottom:14px;flex-wrap:wrap;
+  }
+  .sec-title{font-size:1.02rem;font-weight:800;margin:0 0 4px}
+  .sec-sub{font-size:.82rem;color:var(--muted);margin:0}
+
+  /* ==== Grafik ==== */
+  .chart-wrap{
+    width:100%;height:220px;position:relative;overflow:hidden;
+  }
+  #chart{width:100%;height:100%;display:block}
+  .chart-line{fill:none;stroke:var(--chart-line);stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}
+  .chart-area{fill:url(#chartGrad)}
+  .chart-grid{stroke:var(--chart-grid);stroke-width:1;stroke-dasharray:3 4}
+  .chart-label{fill:var(--muted);font-size:11px;font-weight:700}
+  .chart-empty{fill:var(--muted);font-size:13px;font-weight:600}
+
+  /* ==== Projeksiyonlar ==== */
+  .proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:10px}
+  .proj{
+    background:var(--card-2);border:1px solid var(--border);
+    border-radius:14px;padding:14px 10px;text-align:center;
+    transition:transform .2s,border-color .2s;
+  }
+  .proj:hover{transform:translateY(-2px);border-color:var(--border-strong)}
+  .proj .t{font-size:.7rem;color:var(--muted);font-weight:800;letter-spacing:.06em;margin-bottom:7px;text-transform:uppercase}
+  .proj .v{font-size:1rem;font-weight:800;color:var(--green);font-variant-numeric:tabular-nums}
+
+  /* ==== Hedefler ==== */
+  .goal-form{
+    display:grid;grid-template-columns:60px 1fr 120px auto auto;gap:8px;
+    padding:14px;margin-bottom:14px;
+    background:var(--card-2);border:1px solid var(--border);border-radius:14px;
+    animation:fadeUp .3s ease;
+  }
+  .goal-form[hidden]{display:none}
+  .goal-form input{padding:9px 11px;font-size:.86rem}
+  .goal-form button{padding:9px 14px;font-size:.8rem}
+  @media(max-width:600px){
+    .goal-form{grid-template-columns:60px 1fr;gap:8px}
+    .goal-form input#goalPrice{grid-column:1/-1}
+    .goal-form button{grid-column:auto}
+  }
+  .milestone{
+    display:flex;gap:14px;align-items:center;padding:12px;
+    border-radius:14px;border:1px solid transparent;
+    transition:background .3s,border-color .3s;
+    position:relative;
+  }
+  .milestone + .milestone{margin-top:4px}
+  .milestone.done{background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.25)}
+  .ms-emoji{
+    font-size:1.4rem;width:44px;height:44px;flex:0 0 auto;
+    display:grid;place-items:center;border-radius:12px;
+    background:var(--card-2);filter:grayscale(.8);opacity:.6;
+    transition:filter .3s,opacity .3s;
+  }
+  .milestone.done .ms-emoji{filter:none;opacity:1;background:rgba(52,211,153,.15)}
+  .ms-body{flex:1;min-width:0}
+  .ms-top{
+    display:flex;justify-content:space-between;gap:10px;
+    font-size:.88rem;font-weight:700;margin-bottom:8px;
+  }
+  .ms-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .ms-price{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .milestone.done .ms-price{color:var(--green)}
+  .ms-bar{height:7px;border-radius:99px;background:var(--card-2);overflow:hidden;position:relative}
+  .ms-bar::before{
+    content:"";position:absolute;inset:0;background:var(--border);
+    border-radius:99px;
+  }
+  .ms-fill{
+    position:relative;height:100%;width:0;border-radius:99px;
+    background:linear-gradient(90deg,#34d399,#22d3ee);
+    transition:width .6s ease;
+  }
+  .ms-pct{font-size:.7rem;color:var(--muted);margin-top:6px;font-weight:800;display:flex;justify-content:space-between}
+  .milestone.done .ms-pct{color:var(--green)}
+  .ms-del{
+    flex-shrink:0;width:28px;height:28px;padding:0;border-radius:8px;
+    display:grid;place-items:center;font-size:.85rem;
+    opacity:0;transition:opacity .2s;
+    background:transparent;border:none;color:var(--muted);
+  }
+  .milestone:hover .ms-del{opacity:1}
+  .ms-del:hover{background:rgba(248,113,113,.15);color:var(--red)}
+  .empty-msg{
+    text-align:center;padding:20px;color:var(--muted);font-size:.86rem;
+  }
+
+  /* ==== Sağlık ==== */
+  .health-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:2px}
+  .health-item{
+    display:flex;gap:12px;align-items:flex-start;padding:10px 4px;
+    font-size:.87rem;color:var(--muted);
+    transition:color .35s;border-bottom:1px solid transparent;
+  }
+  .health-item + .health-item{border-top:1px solid var(--border)}
+  .health-item .dot{
+    flex:0 0 auto;width:22px;height:22px;border-radius:50%;
+    border:2px solid var(--border);display:grid;place-items:center;
+    font-size:.68rem;margin-top:1px;transition:.35s;
+    background:var(--card-2);
+  }
+  .health-item.done{color:var(--txt)}
+  .health-item.done .dot{
+    background:linear-gradient(135deg,#34d399,#22d3ee);
+    border-color:transparent;color:#04231a;font-weight:900;
+  }
+  .health-item.done .dot::after{content:"✓"}
+  .health-item .txt{flex:1}
+  .health-item .when{
+    font-size:.72rem;font-weight:800;color:var(--muted);
+    white-space:nowrap;margin-left:8px;font-variant-numeric:tabular-nums;
+  }
+  .health-item.done .when{color:var(--green)}
+
+  /* ==== Footer ==== */
+  footer{
+    text-align:center;font-size:.75rem;color:var(--muted);
+    padding-top:8px;line-height:1.6;opacity:.7;
+  }
+
+  /* ==== Konfeti ==== */
+  #confetti{
+    position:fixed;inset:0;pointer-events:none;z-index:9999;
+  }
+
+  /* ==== Toast ==== */
+  #toasts{
+    position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+    z-index:10000;display:flex;flex-direction:column;gap:8px;
+    align-items:center;pointer-events:none;
+    max-width:calc(100vw - 32px);
+  }
+  .toast{
+    background:var(--card-solid);border:1px solid var(--border-strong);
+    color:var(--txt);padding:12px 20px;border-radius:14px;
+    font-size:.86rem;font-weight:700;
+    box-shadow:0 20px 40px -10px rgba(0,0,0,.4);
+    animation:toastIn .35s cubic-bezier(.2,1.2,.4,1);
+    max-width:100%;
+  }
+  .toast.success{border-color:rgba(52,211,153,.4)}
+  .toast.success::before{content:"🎉 ";margin-right:2px}
+  .toast.leaving{animation:toastOut .3s ease forwards}
+  @keyframes toastIn{
+    from{opacity:0;transform:translateY(20px) scale(.95)}
+    to{opacity:1;transform:translateY(0) scale(1)}
+  }
+  @keyframes toastOut{
+    to{opacity:0;transform:translateY(10px) scale(.95)}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top-bar">
+    <div class="brand">
+      <h1>🚭 <span class="grad">Sigarasız Hayat</span></h1>
+      <p class="quote" id="quote">Her sigarasız gün, kendine bir armağan.</p>
+    </div>
+    <div class="actions">
+      <button class="icon-btn" id="themeBtn" aria-label="Tema değiştir" title="Tema">🌙</button>
+      <button class="icon-btn" id="shareBtn" aria-label="Paylaş" title="Özeti kopyala">📤</button>
+      <button class="icon-btn" id="settingsBtn" aria-label="Ayarlar" title="Ayarlar">⚙️</button>
+    </div>
+  </header>
+
+  <!-- Ayarlar -->
+  <section class="card" id="settings">
+    <h2 class="sec-title" style="margin-bottom:14px">⚙️ Ayarlar</h2>
+    <div class="settings-grid">
+      <label class="field full">Bırakma tarihi ve saati
+        <input type="datetime-local" id="quitDate">
+      </label>
+      <label class="field">Günde kaç paket
+        <input type="number" id="packsPerDay" min="0.1" max="20" step="0.1" value="1">
+      </label>
+      <label class="field">Paket fiyatı (₺)
+        <input type="number" id="packPrice" min="1" max="10000" step="1" value="125">
+      </label>
+    </div>
+    <div class="btn-row">
+      <button class="primary" id="nowBtn">Şimdi bıraktım 🚭</button>
+      <button id="exportBtn">Verileri dışa aktar</button>
+      <button class="danger" id="resetBtn">Sıfırla</button>
+    </div>
+  </section>
+
+  <!-- Büyük sayaç -->
+  <section class="card hero">
+    <div class="label">Biriken para</div>
+    <div class="money" id="money">₺0,0000</div>
+    <div class="clock" id="clock">0 gün 00:00:00 sigarasız</div>
+    <div class="rate" id="rate"></div>
+    <div class="note" id="note"></div>
+    <div class="equivalents" id="equivalents" aria-live="polite"></div>
+  </section>
+
+  <!-- İstatistikler -->
+  <section class="stats">
+    <div class="stat"><b id="statDays">0</b><small>Sigarasız gün</small></div>
+    <div class="stat"><b id="statCigs">0</b><small>İçilmeyen sigara</small></div>
+    <div class="stat"><b id="statPacks">0</b><small>İçilmeyen paket</small></div>
+    <div class="stat"><b id="statPerDay">₺0</b><small>Günlük tasarruf</small></div>
+  </section>
+
+  <!-- Grafik -->
+  <section class="card">
+    <div class="sec-head">
+      <div>
+        <h2 class="sec-title">📊 Birikim Grafiği</h2>
+        <p class="sec-sub">Bıraktığın günden bu yana</p>
+      </div>
+    </div>
+    <div class="chart-wrap">
+      <svg id="chart" viewBox="0 0 800 220" preserveAspectRatio="none" aria-label="Birikim grafiği" role="img"></svg>
+    </div>
+  </section>
+
+  <!-- Projeksiyonlar -->
+  <section class="card">
+    <div class="sec-head">
+      <div>
+        <h2 class="sec-title">📈 Böyle devam edersen</h2>
+        <p class="sec-sub">Bu süre boyunca cebinde kalacak para</p>
+      </div>
+    </div>
+    <div class="proj-grid" id="projections"></div>
+  </section>
+
+  <!-- Hedefler -->
+  <section class="card">
+    <div class="sec-head">
+      <div>
+        <h2 class="sec-title">🎯 Hedefler</h2>
+        <p class="sec-sub">Biriken paranla neler alabilirsin?</p>
+      </div>
+      <button id="addGoalBtn" aria-label="Hedef ekle">+ Hedef ekle</button>
+    </div>
+    <form class="goal-form" id="goalForm" hidden>
+      <input id="goalEmoji" placeholder="🎁" maxlength="4" aria-label="Sembol">
+      <input id="goalName" placeholder="Hedef adı" required aria-label="Hedef adı" maxlength="40">
+      <input id="goalPrice" type="number" placeholder="Fiyat (₺)" min="1" required aria-label="Fiyat">
+      <button type="submit" class="primary">Ekle</button>
+      <button type="button" id="cancelGoal">İptal</button>
+    </form>
+    <div id="goals"></div>
+  </section>
+
+  <!-- Sağlık -->
+  <section class="card">
+    <div class="sec-head">
+      <div>
+        <h2 class="sec-title">❤️ Vücudundaki değişim</h2>
+        <p class="sec-sub">Sigarasız geçen her an bir kazanç</p>
+      </div>
+    </div>
+    <ul class="health-list" id="health"></ul>
+  </section>
+
+  <footer>
+    Değerler tahminîdir; motivasyon amaçlıdır. Sağlık bilgileri genel bilgilendirme niteliğindedir.
+  </footer>
+
+</div>
+
+<canvas id="confetti"></canvas>
+<div id="toasts" aria-live="polite" aria-atomic="true"></div>
+
+<script>
+/* ============================================================
+   Sigarasız Hayat — Gelişmiş Tasarruf Sayacı
+   ============================================================ */
+const $ = (s) => document.querySelector(s);
+const $$ = (s) => document.querySelectorAll(s);
+const KEY = 'sigarasiz-hayat-v2';
+const CIGS_PER_PACK = 20;
+
+/* ---- Varsayılan hedefler ---- */
+const DEFAULT_GOALS = [
+  { id:'g1', emoji:'☕', name:'Bir aylık kahve keyfi',      price:500,   removable:false },
+  { id:'g2', emoji:'🎧', name:'Kablosuz kulaklık',          price:1500,  removable:false },
+  { id:'g3', emoji:'🍽️', name:'Sevdiklerine güzel bir yemek', price:3000, removable:false },
+  { id:'g4', emoji:'👟', name:'İyi bir spor ayakkabı',      price:5000,  removable:false },
+  { id:'g5', emoji:'📱', name:'Yeni bir telefon',           price:15000, removable:false },
+  { id:'g6', emoji:'🏝️', name:'Bir haftalık tatil',         price:40000, removable:true  },
+  { id:'g7', emoji:'🛵', name:'Motorsiklet peşinatı',       price:100000,removable:false }
+];
+
+/* ---- Sağlık kilometre taşları (gün cinsinden) ---- */
+const HEALTH = [
+  { min: 20/1440,       text:'20 dakika: Nabız ve tansiyon normale dönmeye başladı.' },
+  { min: 8/24,          text:'8 saat: Kandaki karbonmonoksit seviyesi yarıya indi.' },
+  { min: 12/24,         text:'12 saat: Karbonmonoksit seviyesi normale döndü.' },
+  { min: 1,             text:'1 gün: Kalp krizi riski azalmaya başladı.' },
+  { min: 2,             text:'2 gün: Tat ve koku duyuları iyileşiyor.' },
+  { min: 3,             text:'3 gün: Nikotin vücuttan tamamen temizlendi.' },
+  { min: 7,             text:'1 hafta: Nefes almak belirgin şekilde kolaylaşıyor.' },
+  { min: 14,            text:'2 hafta: Akciğer fonksiyonları ve dolaşım iyileşiyor.' },
+  { min: 30,            text:'1 ay: Öksürük ve nefes darlığı azalıyor.' },
+  { min: 90,            text:'3 ay: Akciğer kapasitesi %10 artıyor.' },
+  { min: 270,           text:'9 ay: Siliyer hücreler yenilendi, enfeksiyon riski azaldı.' },
+  { min: 365,           text:'1 yıl: Kalp hastalığı riski yarıya indi.' },
+  { min: 1825,          text:'5 yıl: İnme riski sigara içmeyenlerle aynı seviyede.' },
+  { min: 3650,          text:'10 yıl: Akciğer kanseri riski yarıya indi.' },
+  { min: 5475,          text:'15 yıl: Kalp hastalığı riski sigara içmeyenlerle aynı.' }
+];
+
+/* ---- Para eşdeğerleri ---- */
+const EQUIVALENTS = [
+  { emoji:'☕', name:'kahve',        price:50  },
+  { emoji:'🎬', name:'sinema',       price:100 },
+  { emoji:'🍕', name:'pizza',        price:150 },
+  { emoji:'📚', name:'kitap',        price:200 }
+];
+
+/* ---- Motivasyon alıntıları ---- */
+const QUOTES = [
+  'Her sigarasız gün, kendine bir armağan.',
+  'Nefes almak özgürlüktür.',
+  'Bugün, geleceğine yaptığın en güzel yatırım.',
+  'Bıraktığın her sigara, kazandığın bir gün.',
+  'İradesi güçlü olan, hayatın kontrolünü elinde tutar.',
+  'Sigara içmeyen sen, en güçlü sen.',
+  'Her an yeniden başlayabilirsin.',
+  'Paran ve sağlığın cebinde kalsın.',
+  'Sen bu savaşı kazanabilirsin.',
+  'Küçük adımlar, büyük değişimler yaratır.'
+];
+
+/* ---- Biçimlendiriciler ---- */
+const nfMoney2 = new Intl.NumberFormat('tr-TR', { style:'currency', currency:'TRY', minimumFractionDigits:2, maximumFractionDigits:2 });
+const nfMoney0 = new Intl.NumberFormat('tr-TR', { style:'currency', currency:'TRY', maximumFractionDigits:0 });
+const nfInt    = new Intl.NumberFormat('tr-TR', { maximumFractionDigits:0 });
+
+/* ============================================================
+   STATE
+   ============================================================ */
+function defaultState(){
+  return {
+    quitDate: new Date().toISOString(),
+    packsPerDay: 1,
+    packPrice: 125,
+    goals: [...DEFAULT_GOALS],
+    celebrated: [],          // {id, at}
+    theme: 'dark'
+  };
+}
+function loadState(){
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (!raw) return defaultState();
+    const s = JSON.parse(raw);
+    const base = defaultState();
+    return {
+      quitDate:      typeof s.quitDate === 'string' ? s.quitDate : base.quitDate,
+      packsPerDay:   Number(s.packsPerDay) > 0 ? Math.min(Number(s.packsPerDay), 20) : 1,
+      packPrice:     Number(s.packPrice)   > 0 ? Math.min(Number(s.packPrice), 10000) : 125,
+      goals:         Array.isArray(s.goals) && s.goals.length ? s.goals : [...DEFAULT_GOALS],
+      celebrated:    Array.isArray(s.celebrated) ? s.celebrated : [],
+      theme:         s.theme === 'light' ? 'light' : 'dark'
+    };
+  } catch(e){ return defaultState(); }
+}
+let state = loadState();
+function saveState(){
+  try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){}
+}
+
+/* ============================================================
+   YARDIMCILAR
+   ============================================================ */
+function toLocalInput(iso){
+  const d = new Date(iso);
+  const off = d.getTimezoneOffset() * 60000;
+  return new Date(d.getTime() - off).toISOString().slice(0,16);
+}
+function liveClock(ms){
+  const total = Math.floor(ms/1000);
+  const d = Math.floor(total/86400);
+  const h = Math.floor((total%86400)/3600);
+  const m = Math.floor((total%3600)/60);
+  const s = total%60;
+  const p = n => String(n).padStart(2,'0');
+  return `${d} gün ${p(h)}:${p(m)}:${p(s)} sigarasız`;
+}
+function formatRemaining(ms){
+  if (ms <= 0) return 'Tamamlandı';
+  const sec = ms/1000;
+  if (sec < 60) return `${Math.ceil(sec)} sn kaldı`;
+  const min = sec/60;
+  if (min < 60) return `${Math.ceil(min)} dk kaldı`;
+  const hr = min/60;
+  if (hr < 24) return `${Math.ceil(hr)} saat kaldı`;
+  const day = hr/24;
+  if (day < 30) return `${Math.ceil(day)} gün kaldı`;
+  if (day < 365) return `${Math.ceil(day/30)} ay kaldı`;
+  return `${Math.ceil(day/365)} yıl kaldı`;
+}
+function fmtMoney4(n){
+  // 4 ondalıklı canlı gösterim için özel biçim
+  const s = n.toLocaleString('tr-TR', { minimumFractionDigits:4, maximumFractionDigits:4 });
+  return '₺' + s;
+}
+
+/* ============================================================
+   DOM
+   ============================================================ */
+const el = {
+  quit: $('#quitDate'), ppd: $('#packsPerDay'), price: $('#packPrice'),
+  nowBtn: $('#nowBtn'), resetBtn: $('#resetBtn'), exportBtn: $('#exportBtn'),
+  settings: $('#settings'), settingsBtn: $('#settingsBtn'),
+  themeBtn: $('#themeBtn'), shareBtn: $('#shareBtn'),
+  money: $('#money'), clock: $('#clock'), rate: $('#rate'), note: $('#note'),
+  equivalents: $('#equivalents'),
+  statDays: $('#statDays'), statCigs: $('#statCigs'),
+  statPacks: $('#statPacks'), statPerDay: $('#statPerDay'),
+  projections: $('#projections'),
+  goals: $('#goals'), addGoalBtn: $('#addGoalBtn'),
+  goalForm: $('#goalForm'), goalEmoji: $('#goalEmoji'),
+  goalName: $('#goalName'), goalPrice: $('#goalPrice'),
+  cancelGoal: $('#cancelGoal'),
+  health: $('#health'),
+  quote: $('#quote'),
+  chart: $('#chart'),
+  toasts: $('#toasts'),
+  confetti: $('#confetti')
+};
+
+/* ============================================================
+   TEMA
+   ============================================================ */
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme', t);
+  el.themeBtn.textContent = t === 'dark' ? '🌙' : '☀️';
+  el.themeBtn.setAttribute('aria-label', t === 'dark' ? 'Aydınlık temaya geç' : 'Karanlık temaya geç');
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', t === 'dark' ? '#060b09' : '#f2f7f4');
+}
+el.themeBtn.addEventListener('click', () => {
+  state.theme = state.theme === 'dark' ? 'light' : 'dark';
+  applyTheme(state.theme);
+  saveState();
+  drawChart();
+});
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+function showToast(msg, type='info'){
+  const t = document.createElement('div');
+  t.className = 'toast' + (type === 'success' ? ' success' : '');
+  t.textContent = msg;
+  el.toasts.appendChild(t);
+  setTimeout(() => {
+    t.classList.add('leaving');
+    setTimeout(() => t.remove(), 320);
+  }, 3800);
+}
+
+/* ============================================================
+   KONFETİ
+   ============================================================ */
+const confettiCtx = el.confetti.getContext('2d');
+let confettiParticles = [];
+let confettiRAF = null;
+
+function resizeConfetti(){
+  el.confetti.width = window.innerWidth;
+  el.confetti.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeConfetti);
+resizeConfetti();
+
+function fireConfetti(){
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const W = el.confetti.width, H = el.confetti.height;
+  const colors = ['#34d399','#22d3ee','#fbbf24','#f472b6','#a78bfa','#f87171'];
+  const N = 140;
+  for (let i = 0; i < N; i++){
+    const angle = (Math.random() * Math.PI) - Math.PI/2;   // yukarı doğru
+    const speed = 6 + Math.random() * 12;
+    confettiParticles.push({
+      x: W/2 + (Math.random() - 0.5) * 40,
+      y: H * 0.6,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed - 4,
+      size: 4 + Math.random() * 8,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      rot: Math.random() * Math.PI * 2,
+      vr: (Math.random() - 0.5) * 0.35,
+      life: 1
+    });
+  }
+  if (!confettiRAF) animateConfetti();
+}
+
+function animateConfetti(){
+  confettiRAF = requestAnimationFrame(animateConfetti);
+  const ctx = confettiCtx;
+  const W = el.confetti.width, H = el.confetti.height;
+  ctx.clearRect(0, 0, W, H);
+
+  for (let i = confettiParticles.length - 1; i >= 0; i--){
+    const p = confettiParticles[i];
+    p.x += p.vx;
+    p.y += p.vy;
+    p.vy += 0.45;          // yerçekimi
+    p.vx *= 0.992;
+    p.rot += p.vr;
+    p.life -= 0.006;
+
+    if (p.life <= 0 || p.y > H + 40){
+      confettiParticles.splice(i, 1);
+      continue;
+    }
+    ctx.save();
+    ctx.globalAlpha = Math.max(0, p.life);
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rot);
+    ctx.fillStyle = p.color;
+    ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size * 0.55);
+    ctx.restore();
+  }
+
+  if (confettiParticles.length === 0){
+    cancelAnimationFrame(confettiRAF);
+    confettiRAF = null;
+    ctx.clearRect(0, 0, W, H);
+  }
+}
+
+/* ============================================================
+   HESAPLAMALAR
+   ============================================================ */
+function getElapsed(){
+  const quit = new Date(state.quitDate).getTime();
+  const now = Date.now();
+  return { elapsed: Math.max(0, now - quit), quitMs: quit, nowMs: now };
+}
+function getDailySaving(){
+  return state.packsPerDay * state.packPrice;
+}
+function getMoney(){
+  const { elapsed } = getElapsed();
+  return (elapsed / 86400000) * getDailySaving();
+}
+
+/* ============================================================
+   ÖLÇÜLÜ GÖSTERİM (hero)
+   ============================================================ */
+function renderHero(){
+  const { elapsed, nowMs } = getElapsed();
+  const perDay = getDailySaving();
+  const money = (elapsed / 86400000) * perDay;
+
+  // 4 ondalıklı canlı gösterim
+  const intPart = Math.floor(money);
+  const frac = Math.max(0, money - intPart);
+  const fracStr = frac.toFixed(4).slice(2);   // "1234"
+  const intStr = intPart.toLocaleString('tr-TR');
+  el.money.innerHTML = `₺${intStr}<span class="kurus">,${fracStr}</span>`;
+
+  el.clock.textContent = liveClock(elapsed);
+
+  const perSec = perDay / 86400;
+  el.rate.innerHTML = `Saniyede <b>${(perSec).toFixed(6)} ₺</b> birikiyor · Günde <b>${nfMoney0.format(perDay)}</b>`;
+
+  el.note.textContent = nowMs < new Date(state.quitDate).getTime()
+    ? '⏳ Bırakma tarihin gelecekte. Sayaç o an başlayacak.'
+    : '';
+
+  renderEquivalents(money);
+}
+
+function renderEquivalents(money){
+  el.equivalents.innerHTML = EQUIVALENTS.map(eq => {
+    const count = Math.floor(money / eq.price);
+    const cls = count > 0 ? 'equiv' : 'equiv zero';
+    return `<div class="${cls}" title="${nfMoney0.format(eq.price)} / adet">
+      <span>${eq.emoji}</span>
+      <span><b>${nfInt.format(count)}</b> ${eq.name}</span>
+    </div>`;
+  }).join('');
+}
+
+/* ============================================================
+   İSTATİSTİKLER
+   ============================================================ */
+function renderStats(){
+  const { elapsed } = getElapsed();
+  const days = elapsed / 86400000;
+  const perDay = getDailySaving();
+
+  el.statDays.textContent  = nfInt.format(Math.floor(days));
+  el.statCigs.textContent  = nfInt.format(Math.floor(days * state.packsPerDay * CIGS_PER_PACK));
+  el.statPacks.textContent = nfInt.format(Math.floor(days * state.packsPerDay));
+  el.statPerDay.textContent = nfMoney0.format(perDay);
+}
+
+/* ============================================================
+   PROJEKSİYONLAR
+   ============================================================ */
+function renderProjections(){
+  const perDay = getDailySaving();
+  const periods = [
+    { t:'1 hafta', d:7 },
+    { t:'1 ay',    d:30 },
+    { t:'6 ay',    d:182 },
+    { t:'1 yıl',   d:365 },
+    { t:'5 yıl',   d:1825 }
+  ];
+  el.projections.innerHTML = periods.map(p => `
+    <div class="proj">
+      <div class="t">${p.t}</div>
+      <div class="v">${nfMoney0.format(perDay * p.d)}</div>
+    </div>`).join('');
+}
+
+/* ============================================================
+   HEDEFLER
+   ============================================================ */
+function renderGoals(){
+  const money = getMoney();
+  const goals = state.goals;
+
+  if (!goals.length){
+    el.goals.innerHTML = '<div class="empty-msg">Henüz hedef yok. “+ Hedef ekle” ile kendi hedefini koy.</div>';
+    return;
+  }
+
+  el.goals.innerHTML = goals.map(g => {
+    const pct = Math.min(100, (money / g.price) * 100);
+    const done = money >= g.price;
+    const remaining = done ? 'Hedefe ulaştın 🎉' : formatRemaining(((g.price - money) / getDailySaving()) * 86400000);
+    const delBtn = g.removable ? `<button class="ms-del" data-del="${g.id}" aria-label="Hedefi sil" title="Sil">✕</button>` : '';
+    return `
+      <div class="milestone${done ? ' done' : ''}">
+        <div class="ms-emoji">${escapeHtml(g.emoji || '🎁')}</div>
+        <div class="ms-body">
+          <div class="ms-top">
+            <span class="ms-name">${escapeHtml(g.name)}</span>
+            <span class="ms-price">${nfMoney0.format(g.price)}</span>
+          </div>
+          <div class="ms-bar"><div class="ms-fill" style="width:${pct.toFixed(1)}%"></div></div>
+          <div class="ms-pct">
+            <span>%${Math.floor(pct)}</span>
+            <span>${remaining}</span>
+          </div>
+        </div>
+        ${delBtn}
+      </div>`;
+  }).join('');
+
+  el.goals.querySelectorAll('[data-del]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-del');
+      state.goals = state.goals.filter(g => g.id !== id);
+      saveState();
+      renderGoals();
+      renderChart();
+    });
+  });
+}
+
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, c => ({
+    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+  }[c]));
+}
+
+el.addGoalBtn.addEventListener('click', () => {
+  el.goalForm.hidden = !el.goalForm.hidden;
+  if (!el.goalForm.hidden){
+    el.goalForm.style.display = '';
+    el.goalName.focus();
+  }
+});
+el.cancelGoal.addEventListener('click', () => {
+  el.goalForm.reset();
+  el.goalForm.hidden = true;
+});
+el.goalForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const name = el.goalName.value.trim();
+  const price = parseFloat(el.goalPrice.value);
+  const emoji = el.goalEmoji.value.trim() || '🎁';
+  if (!name || !isFinite(price) || price <= 0) return;
+
+  state.goals.push({
+    id: 'g' + Date.now() + Math.random().toString(36).slice(2,7),
+    emoji, name, price, removable: true
+  });
+  saveState();
+  renderGoals();
+  renderChart();
+  showToast(`“${name}” hedefi eklendi.`, 'success');
+  el.goalForm.reset();
+  el.goalForm.hidden = true;
+});
+
+/* ============================================================
+   SAĞLIK ZAMAN ÇİZELGESİ
+   ============================================================ */
+function renderHealth(){
+  const { elapsed } = getElapsed();
+  const days = elapsed / 86400000;
+
+  el.health.innerHTML = HEALTH.map(h => {
+    const done = days >= h.min;
+    const remainingMs = Math.max(0, (h.min - days) * 86400000);
+    const when = done ? '✓' : formatRemaining(remainingMs);
+    return `
+      <li class="health-item${done ? ' done' : ''}">
+        <span class="dot"></span>
+        <span class="txt">${h.text}</span>
+        <span class="when">${when}</span>
+      </li>`;
+  }).join('');
+}
+
+/* ============================================================
+   GRAFİK
+   ============================================================ */
+function drawChart(){
+  const svg = el.chart;
+  const W = 800, H = 220;
+  const pad = { l: 16, r: 16, t: 16, b: 26 };
+  const iw = W - pad.l - pad.r;
+  const ih = H - pad.t - pad.b;
+
+  const { elapsed } = getElapsed();
+  const perDay = getDailySaving();
+
+  // Boş durum
+  if (elapsed < 60 * 1000){
+    svg.innerHTML = `
+      <text x="${W/2}" y="${H/2}" text-anchor="middle" class="chart-empty">
+        Grafik için henüz yeterli veri yok — sayaç ilerledikçe burası dolacak.
+      </text>`;
+    return;
+  }
+
+  const maxMoney = (elapsed / 86400000) * perDay;
+
+  // Örnek noktalar
+  const N = 40;
+  const pts = [];
+  for (let i = 0; i <= N; i++){
+    const t = i / N;
+    const money = maxMoney * t;
+    const x = pad.l + t * iw;
+    const y = pad.t + ih - (money / maxMoney) * ih;
+    pts.push({ x, y });
+  }
+
+  // SVG içeriği
+  const linePath = pts.map((p, i) => (i === 0 ? 'M' : 'L') + p.x.toFixed(1) + ' ' + p.y.toFixed(1)).join(' ');
+  const areaPath = linePath
+    + ` L${(pad.l + iw).toFixed(1)} ${(pad.t + ih).toFixed(1)}`
+    + ` L${pad.l.toFixed(1)} ${(pad.t + ih).toFixed(1)} Z`;
+
+  // Yatay grid çizgileri (5 çizgi)
+  const gridLines = [];
+  for (let i = 0; i <= 4; i++){
+    const y = pad.t + (ih * i / 4);
+    gridLines.push(`<line class="chart-grid" x1="${pad.l}" y1="${y}" x2="${pad.l + iw}" y2="${y}"/>`);
+  }
+
+  svg.innerHTML = `
+    <defs>
+      <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="var(--chart-area-top)"/>
+        <stop offset="100%" stop-color="var(--chart-area-bot)"/>
+      </linearGradient>
+    </defs>
+    ${gridLines.join('')}
+    <path class="chart-area" d="${areaPath}"/>
+    <path class="chart-line" d="${linePath}"/>
+    <text class="chart-label" x="${pad.l}" y="${H - 8}">başlangıç</text>
+    <text class="chart-label" x="${pad.l + iw}" y="${H - 8}" text-anchor="end">şimdi</text>
+    <text class="chart-label" x="${pad.l + 4}" y="${pad.t + 12}" style="fill:var(--green)">${nfMoney0.format(maxMoney)}</text>
+    <text class="chart-label" x="${pad.l + 4}" y="${pad.t + ih - 2}">₺0</text>
+  `;
+}
+
+/* ============================================================
+   ALINTI DÖNDÜRÜCÜ
+   ============================================================ */
+let quoteIdx = 0;
+function rotateQuote(){
+  quoteIdx = (quoteIdx + 1) % QUOTES.length;
+  el.quote.style.opacity = '0';
+  setTimeout(() => {
+    el.quote.textContent = QUOTES[quoteIdx];
+    el.quote.style.opacity = '';
+  }, 400);
+}
+setInterval(rotateQuote, 20000);
+
+/* ============================================================
+   KUTLAMA (hedefe ulaşınca)
+   ============================================================ */
+function initCelebrated(){
+  // İlk yüklemede mevcut hedefler sessizce "kutlanmış" sayılır
+  const money = getMoney();
+  let changed = false;
+  state.goals.forEach(g => {
+    const already = state.celebrated.find(c => c.id === g.id);
+    if (money >= g.price && !already){
+      state.celebrated.push({ id: g.id, at: Date.now() });
+      changed = true;
+    }
+  });
+  if (changed) saveState();
+}
+
+function checkCelebrations(){
+  const money = getMoney();
+  let anyNew = false;
+  state.goals.forEach(g => {
+    const already = state.celebrated.find(c => c.id === g.id);
+    if (money >= g.price && !already){
+      state.celebrated.push({ id: g.id, at: Date.now() });
+      anyNew = true;
+      showToast(`“${g.name}” hedefine ulaştın!`, 'success');
+    }
+  });
+  if (anyNew){
+    saveState();
+    fireConfetti();
+  }
+}
+
+/* ============================================================
+   PAYLAŞ
+   ============================================================ */
+el.shareBtn.addEventListener('click', async () => {
+  const { elapsed } = getElapsed();
+  const days = Math.floor(elapsed / 86400000);
+  const money = getMoney();
+  const text =
+    `🚭 Sigarasız hayatımın ${days}. gününde ${nfMoney2.format(money)} biriktirdim!\n` +
+    `Günde ${nfMoney0.format(getDailySaving())} cebimde kalıyor.\n` +
+    `Sen de kendi sayacını başlat: Sigarasız Hayat`;
+
+  try {
+    await navigator.clipboard.writeText(text);
+    showToast('Özet panoya kopyalandı.');
+  } catch(e){
+    showToast('Kopyalanamadı.');
+  }
+});
+
+/* ============================================================
+   DIŞA AKTAR
+   ============================================================ */
+el.exportBtn.addEventListener('click', () => {
+  const data = JSON.stringify({
+    exportedAt: new Date().toISOString(),
+    ...state
+  }, null, 2);
+  const blob = new Blob([data], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `sigarasiz-hayat-${new Date().toISOString().slice(0,10)}.json`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  showToast('Veriler dışa aktarıldı.');
+});
+
+/* ============================================================
+   AYAR OLAYLARI
+   ============================================================ */
+el.settingsBtn.addEventListener('click', () => {
+  el.settings.classList.toggle('open');
+  if (el.settings.classList.contains('open')){
+    el.settings.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  }
+});
+
+el.quit.addEventListener('input', () => {
+  const v = el.quit.value;
+  if (!v) return;
+  const d = new Date(v);
+  if (isNaN(d.getTime())) return;
+  state.quitDate = d.toISOString();
+  saveState();
+  renderAll();
+  initCelebrated();
+});
+
+el.ppd.addEventListener('input', () => {
+  const v = parseFloat(el.ppd.value);
+  if (!isFinite(v) || v <= 0) return;
+  state.packsPerDay = Math.min(v, 20);
+  saveState();
+  renderAll();
+  initCelebrated();
+});
+
+el.price.addEventListener('input', () => {
+  const v = parseFloat(el.price.value);
+  if (!isFinite(v) || v <= 0) return;
+  state.packPrice = Math.min(v, 10000);
+  saveState();
+  renderAll();
+  initCelebrated();
+});
+
+el.nowBtn.addEventListener('click', () => {
+  state.quitDate = new Date().toISOString();
+  el.quit.value = toLocalInput(state.quitDate);
+  saveState();
+  renderAll();
+  showToast('Sayaç başladı. Kararın kutlu olsun! 🚭', 'success');
+  fireConfetti();
+});
+
+el.resetBtn.addEventListener('click', () => {
+  if (!confirm('Tüm ayarlar, hedefler ve birikim sıfırlansın mı?')) return;
+  state = defaultState();
+  applyTheme(state.theme);
+  el.quit.value = toLocalInput(state.quitDate);
+  el.ppd.value = state.packsPerDay;
+  el.price.value = state.packPrice;
+  saveState();
+  renderAll();
+  showToast('Her şey sıfırlandı.');
+});
+
+/* ============================================================
+   ANA RENDER
+   ============================================================ */
+function renderAll(){
+  renderHero();
+  renderStats();
+  renderProjections();
+  renderGoals();
+  renderHealth();
+  drawChart();
+}
+
+/* ============================================================
+   DÖNGÜ
+   ============================================================ */
+function tick(){
+  renderHero();
+  renderHealth();
+  checkCelebrations();
+}
+setInterval(tick, 200);
+
+function slowTick(){
+  renderStats();
+  renderGoals();
+  drawChart();
+}
+setInterval(slowTick, 2000);
+
+/* ============================================================
+   BAŞLAT
+   ============================================================ */
+(function init(){
+  applyTheme(state.theme);
+
+  el.quit.value  = toLocalInput(state.quitDate);
+  el.ppd.value   = state.packsPerDay;
+  el.price.value = state.packPrice;
+
+  initCelebrated();
+  renderAll();
+})();
+</script>
+</body>
+</html>
